@@ -2,8 +2,7 @@
 
 ## Matplotlib入門
 
-Matplotlibはデータの可視化とカスタマイズに最も柔軟性のあるインターフェースpyplotを提供します。  
-pyplotの簡単な使用方法は以下：
+Matplotlibはデータの可視化とカスタマイズに最も柔軟性のあるインターフェースpyplotを提供します。 pyplotの簡単な使用方法は以下：
 
 ```python
 import pandas as pd
@@ -25,7 +24,7 @@ import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 
 # df01のvalueをtimeに対してプロット
-ax.plot(df01["time"], df01['value'])
+ax.plot(df01['time'], df01['value'])
 
 # df02のvalueをtimeに対してプロット
 ax.plot(df02['time'], df02['value'])
@@ -34,48 +33,42 @@ ax.plot(df02['time'], df02['value'])
 plt.show()
 ```
 
-### プロットのカスタマイズ
+## プロットのカスタマイズ
+
+マーカー、線のスタイル、線の色を設定できます。  
+また、タイトル、X軸の名称、Y軸の名称も設定できます。
+
+設定可能なフォーマットは [matplotlib.pyplot.plot](https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.plot.html) にあります。
 
 ```python
-# Plot Seattle data, setting data appearance
-ax.plot(seattle_weather["MONTH"], seattle_weather["MLY-PRCP-NORMAL"], color='b',
-        marker='o', linestyle='--')
+# マーカー、線のスタイル、線の色を設定
+ax.plot(df01["time"], df01["value"], color='b', marker='o', linestyle='--')
+ax.plot(df02["time"], df02["value"], color='r', marker='v', linestyle='--')
 
-# Plot Austin data, setting data appearance
-ax.plot(austin_weather["MONTH"], austin_weather["MLY-PRCP-NORMAL"], color='r', marker='v',
-        linestyle='--')
+# X軸の名称を設定
+ax.set_xlabel('Time (s)')
 
-# Customize the x-axis label
-ax.set_xlabel('Time (months)')
+# Y軸の名称を設定
+ax.set_ylabel('Value')
 
-# Customize the y-axis label
-ax.set_ylabel('Precipitation (inches)')
+# タイトルを設定
+ax.set_title('Value patterns in df01 and df02')
 
-# Add the title
-ax.set_title('Weather patterns in Austin and Seattle')
-
-# Call show to display the resulting plot
 plt.show()
 ```
 
-# Create a Figure and an array of subplots with 2 rows and 2 columns
+## サブプロット
 
-fig, ax = plt.subplots(2, 2)
+プロットにデータを追加しすぎると、場合によってはプロットが煩雑になりすぎて、パターンが見えなくなってしまうことがあります。
+その場合はサブプロットを使用します。 [matplotlib.pyplot.subplot](https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.subplot.html)
 
-# Addressing the top left Axes as index 0, 0, plot month and Seattle precipitation
+```python
+# 2行1列のサブプロットを作成
+fig, ax = plt.subplots(2, 1)
 
-ax[0, 0].plot(seattle_weather['MONTH'], seattle_weather['MLY-PRCP-NORMAL'])
+ax[0].plot(df01['time'], df01['value'])
 
-# In the top right (index 0,1), plot month and Seattle temperatures
+ax[1].plot(df02['time'], df02['value'])
 
-ax[0, 1].plot(seattle_weather['MONTH'], seattle_weather['MLY-TAVG-NORMAL'])
-
-# In the bottom left (1, 0) plot month and Austin precipitations
-
-ax[1, 0].plot(austin_weather['MONTH'], austin_weather['MLY-PRCP-NORMAL'])
-
-# In the bottom right (1, 1) plot month and Austin temperatures
-
-ax[1, 1].plot(austin_weather['MONTH'], austin_weather['MLY-TAVG-NORMAL'])
 plt.show()
-
+```
