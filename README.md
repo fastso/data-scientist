@@ -11,7 +11,7 @@
 ## 3. Matplotlibを使ったデータ可視化
 
 * [3.1 Matplotlib入門](matplotlib/Matplotlib入門.md)
-* [3.2 時系列プロット](matplotlib/時系列プロット.md)
+* [3.2 時系列プロット](matplotlib/Matplotlib時系列プロット.md)
 * 3.3 定量的な比較と統計的な可視化
 * 3.4 他人と共有する可視化
 
